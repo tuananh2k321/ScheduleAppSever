@@ -10,6 +10,8 @@ use  SCHEDULE_APP;
 -- user
 -- api: lưu user
 
+
+
 create TABLE if not exists users(
     studentCode VARCHAR(7) NOT NULL PRIMARY KEY,
     email VARCHAR(50) NOT NULL,
@@ -19,6 +21,7 @@ create TABLE if not exists users(
     isLogged BIT DEFAULT 1
 )
 
+
 -- category
 -- api: get category
 create table if not exists categories (
@@ -26,7 +29,13 @@ create table if not exists categories (
     name VARCHAR(500) NOT NULL,
     image VARCHAR(5000) NOT NULL,
     bgColor VARCHAR(5000) NOT NULL
+
 );
+
+
+insert into categories (id, name, image, bgColor) values (1, "Hoạt Động", "", "#E6F2EA");
+insert into categories (id, name, image, bgColor) values (2, "Học Tập", "", "#FFE9E5");
+insert into categories (id, name, image, bgColor) values (3, "Học Phí", "", "#FFF6E3");
 
 -- news
 -- api: get news
@@ -35,7 +44,33 @@ create TABLE if not exists news(
     title VARCHAR(50) NOT NULL,
     image VARCHAR(1000) NOT NULL,
     detail VARCHAR(5000) NOT NULL,
+    categoryID INT NOT NULL,
+    FOREIGN KEY (categoryID) REFERENCES categories(id)
 )
+-- hoạt động
+
+insert into news (id, title, image, detail, categoryID) values (1, "Học Phí", "", "#FFF6E3", 1);
+insert into news (id, title, image, detail, categoryID) values (2, "Học Phí", "", "#FFF6E3", 1);
+insert into news (id, title, image, detail, categoryID) values (3, "Học Phí", "", "#FFF6E3", 1);
+insert into news (id, title, image, detail, categoryID) values (4, "Học Phí", "", "#FFF6E3", 1);
+insert into news (id, title, image, detail, categoryID) values (5, "Học Phí", "", "#FFF6E3", 1);
+insert into news (id, title, image, detail, categoryID) values (6, "Học Phí", "", "#FFF6E3", 1);
+
+-- học tập
+insert into news (id, title, image, detail, categoryID) values (7, "Học Phí", "", "#FFF6E3", 2);
+insert into news (id, title, image, detail, categoryID) values (8, "Học Phí", "", "#FFF6E3", 2);
+insert into news (id, title, image, detail, categoryID) values (9, "Học Phí", "", "#FFF6E3", 2);
+insert into news (id, title, image, detail, categoryID) values (10, "Học Phí", "", "#FFF6E3", 2);
+insert into news (id, title, image, detail, categoryID) values (11, "Học Phí", "", "#FFF6E3", 2);
+insert into news (id, title, image, detail, categoryID) values (12, "Học Phí", "", "#FFF6E3", 2);
+
+-- học phí
+insert into news (id, title, image, detail, categoryID) values (13, "Học Phí", "", "#FFF6E3", 3);
+insert into news (id, title, image, detail, categoryID) values (14, "Học Phí", "", "#FFF6E3", 3);
+insert into news (id, title, image, detail, categoryID) values (15, "Học Phí", "", "#FFF6E3", 3);
+insert into news (id, title, image, detail, categoryID) values (16, "Học Phí", "", "#FFF6E3", 3);
+insert into news (id, title, image, detail, categoryID) values (17, "Học Phí", "", "#FFF6E3", 3);
+insert into news (id, title, image, detail, categoryID) values (18, "Học Phí", "", "#FFF6E3", 3);
 
 -- schedule
 -- api: get all schedule, get schedule by date
@@ -51,8 +86,11 @@ create TABLE if not exists schedules(
 
 create TABLE if not exists notifications(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    title VARCHAR(50) NOT NULL,
-    image VARCHAR(1000) NOT NULL,
+    userID INT NOT NULL,
+    newsID INT NOT NULL,
+
+    FOREIGN KEY (userID) REFERENCES users(id)
+    FOREIGN KEY (newsID) REFERENCES news(id)
 )
 
 -- service
