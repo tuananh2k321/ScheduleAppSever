@@ -2,7 +2,7 @@
 $databaseHost = '127.0.0.1:3306';
 $databaseName = 'SCHEDULE_APP';
 $databaseUsername = 'root';
-$databasePassword = 'anhde0canem';
+$databasePassword = '0123456654';
 
 try {
 	$dbConn = new PDO("mysql:host={$databaseHost};dbname={$databaseName}", 

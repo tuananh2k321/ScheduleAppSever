@@ -12,20 +12,25 @@ use  SCHEDULE_APP;
 
 
 
-create TABLE if not exists users(
-    studentCode VARCHAR(7) NOT NULL PRIMARY KEY,
-    email VARCHAR(50) NOT NULL,
-    avatar VARCHAR(1000) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    address VARCHAR(50) NOT NULL,
-    isLogged BIT DEFAULT 1
-)
+create table if not exists users (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	avatar VARCHAR(150) NOT NULL,
+	name NVARCHAR(100) NOT NULL, -- tiếng việt
+	email VARCHAR(100) NOT NULL UNIQUE,
+    student_code VARCHAR(100) NOT NULL UNIQUE,
+    gender BIT,
+    birthday DATE,
+    address NVARCHAR(500),
+    course NVARCHAR(100)
+);
+
+insert into users (studentCode, email, avatar, password,address) values ("ps1234", "abc@gmail.com", "https://cdn.vox-cdn.com/thumbor/xBIBkXiGLcP-kph3pCX61U7RMPY=/0x0:1400x788/1200x800/filters:focal(588x282:812x506)/cdn.vox-cdn.com/uploads/chorus_image/image/70412073/0377c76083423a1414e4001161e0cdffb0b36e1f_760x400.0.png", "123","tphcm");
 
 
 -- category
 -- api: get category
 create table if not exists categories (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT KEY AUTO_INCREMENT,
     name VARCHAR(500) NOT NULL,
     image VARCHAR(5000) NOT NULL,
     bgColor VARCHAR(5000) NOT NULL
@@ -40,7 +45,7 @@ insert into categories (id, name, image, bgColor) values (3, "Học Phí", "", "
 -- news
 -- api: get news
 create TABLE if not exists news(
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id INT KEY AUTO_INCREMENT,
     title VARCHAR(50) NOT NULL,
     image VARCHAR(1000) NOT NULL,
     detail VARCHAR(5000) NOT NULL,
@@ -75,7 +80,7 @@ insert into news (id, title, image, detail, categoryID) values (18, "Học Phí"
 -- schedule
 -- api: get all schedule, get schedule by date
 create TABLE if not exists schedules(
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id INT KEY AUTO_INCREMENT,
     date DATE NOT NULL,
 
 )
@@ -85,21 +90,32 @@ create TABLE if not exists schedules(
 -- api: get notification, add notification
 
 create TABLE if not exists notifications(
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id INT KEY AUTO_INCREMENT,
     userID INT NOT NULL,
     newsID INT NOT NULL,
 
     FOREIGN KEY (userID) REFERENCES users(id)
     FOREIGN KEY (newsID) REFERENCES news(id)
-)
+);
 
 -- service
 
-create TABLE if not exists services(
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    studentCodeID INT NOT NULL,
-
+create table if not exists services(
+    id INT KEY AUTO_INCREMENT,
+    studentCodeID VARCHAR(7) NOT NULL,
+    image VARCHAR(1000),
+    phoneNumber VARCHAR(20) NOT NULL,
+    service VARCHAR(100) NOT NULL,
+    note VARCHAR(500),
+    quantity INT,
+    mucdich VARCHAR(100),
+    confirm VARCHAR(100),
     FOREIGN KEY (studentCodeID) REFERENCES users(studentCode)
-)
-
+);
+insert into services (id, studentCodeID, image, phoneNumber, service,note,quantity,mucdich,confirm) 
+            values (1, "ps1234", "https://i.pinimg.com/originals/a2/98/16/a29816cd63e5d731cc70cfd3f88c2ce8.jpg", "0123456789", "Cấp thẻ sinh viên","làm nhanh giúp em",1,"","");
+insert into services (id, studentCodeID, image, phoneNumber, service,note,quantity,mucdich,confirm) 
+            values (2, "ps1234", "", "0123456789", "Giấy xác nhận sinh viên","làm nhanh giúp em",1,"Hoãn Nghĩa Vụ","Theo Mẫu của nhà trường");
+insert into services (id, studentCodeID, image, phoneNumber, service,note,quantity,mucdich,confirm) 
+            values (3, "ps1234", "", "0123456789", "Cấp bảng điểm","làm nhanh giúp em",1,"","");
 -- api: add service by mssv, get service
