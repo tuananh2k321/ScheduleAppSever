@@ -110,12 +110,22 @@ create table if not exists services(
     quantity INT,
     mucdich VARCHAR(100),
     confirm VARCHAR(100),
-    FOREIGN KEY (studentCodeID) REFERENCES users(studentCode)
+    FOREIGN KEY (studentCodeID) REFERENCES users(student_code)
 );
 insert into services (id, studentCodeID, image, phoneNumber, service,note,quantity,mucdich,confirm) 
-            values (1, "ps1234", "https://i.pinimg.com/originals/a2/98/16/a29816cd63e5d731cc70cfd3f88c2ce8.jpg", "0123456789", "Cấp thẻ sinh viên","làm nhanh giúp em",1,"","");
+            values (1, "ps24412", "https://i.pinimg.com/originals/a2/98/16/a29816cd63e5d731cc70cfd3f88c2ce8.jpg", "0123456789", "Cấp thẻ sinh viên","làm nhanh giúp em",1,"","");
 insert into services (id, studentCodeID, image, phoneNumber, service,note,quantity,mucdich,confirm) 
-            values (2, "ps1234", "", "0123456789", "Giấy xác nhận sinh viên","làm nhanh giúp em",1,"Hoãn Nghĩa Vụ","Theo Mẫu của nhà trường");
+            values (2, "ps24412", "", "0123456789", "Giấy xác nhận sinh viên","làm nhanh giúp em",1,"Hoãn Nghĩa Vụ","Theo Mẫu của nhà trường");
 insert into services (id, studentCodeID, image, phoneNumber, service,note,quantity,mucdich,confirm) 
-            values (3, "ps1234", "", "0123456789", "Cấp bảng điểm","làm nhanh giúp em",1,"","");
+            values (3, "ps24412", "", "0123456789", "Cấp bảng điểm","làm nhanh giúp em",1,"","");
 -- api: add service by mssv, get service
+
+create table if not exists servicecomplete (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    service VARCHAR(100) NOT NULL,
+    confirm VARCHAR(100) NOT NULL,
+    date VARCHAR(100) NOT NULL,
+    thongbao VARCHAR(500) NOT NULL,
+    studentCodeID VARCHAR(7) NOT NULL,
+    FOREIGN KEY (studentCodeID) REFERENCES users(student_code)
+);

@@ -1,0 +1,54 @@
+<?php
+//// http://127.0.0.1:3456/api/services/insert_confirm_service.php
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+include_once("../../database/connection.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    try {
+        //code...
+        $body = json_decode(file_get_contents("php://input"));
+        $service = $body->service;
+        $mucdich = $body->mucdich;
+        $studentCodeID = $body->studentCodeID;
+        $phoneNumber = $body->phoneNumber;
+        $note = $body->note;
+        $quantity = $body->quantity;
+        $confirm = $body->confirm;
+
+
+        if( empty($service) || empty($mucdich) || empty($studentCodeID) || empty($phoneNumber) || empty($quantity)  || empty($confirm)){
+            echo json_encode(array(
+                "status" => false,
+                "message" => $e->getMessage()
+            ));
+            return;
+        }
+
+        $sql = "INSERT INTO services (studentCodeID,mucdich, phoneNumber, service,quantity,note,confirm)
+        VALUES ('$studentCodeID', '$mucdich', '$phoneNumber', '$service', '$quantity', '$note','$confirm')";
+    if ($dbConn->query($sql) == TRUE) {
+        echo json_encode(array(
+            "status" => "success", 
+            "message" => "Dữ liệu đã được chèn thành công."
+        ));
+        } else {
+            echo json_encode(array(
+                    "status" => "error",
+                     "message" => "Lỗi khi chèn dữ liệu" 
+            ));
+        }
+        
+    } catch (\Throwable $th) {
+        //throw $th;
+        echo json_encode(array(
+            "status" => false,
+            "messages" =>"Lỗi không đúng dữ liệu"
+        ));
+    }
+}
+?>
