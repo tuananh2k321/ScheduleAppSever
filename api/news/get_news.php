@@ -6,10 +6,10 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once("../../database/connection.php");
-// http://localhost:3456/api/product/get_all_product.php
+//http://localhost:3456/api/news/get_news.php
 
 try {
-    $result = $dbConn->query("SELECT id, title, image, description, categoryId FROM products");
+    $result = $dbConn->query("SELECT id, title, image, detail, categoryId FROM news");
     $news = $result->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode(array(
         "status" => true,

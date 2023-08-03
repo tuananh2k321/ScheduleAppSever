@@ -17,9 +17,9 @@ try {
     $stmt = $dbConn->prepare(
         "SELECT 
             n.id, 
-            n.name, 
+            n.title, 
             n.image, 
-            n.description, 
+            n.detail, 
             n.categoryId,
             c.name as categoryName  -- Lấy thông tin tên của category từ bảng categories
         FROM 
@@ -44,7 +44,7 @@ try {
     echo json_encode(array(
         "status" => true,
         "message" => "Success",
-        "products" => $news
+        "news" => $news
     ));
 
 } catch (Exception $e) {
