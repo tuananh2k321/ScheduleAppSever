@@ -11,15 +11,11 @@ use  SCHEDULE_APP;
 -- api: lưu user
 
 create table if not exists users (
-	id INT PRIMARY KEY AUTO_INCREMENT,
+    studentCode VARCHAR(7) PRIMARY KEY NOT NULL,
 	avatar VARCHAR(150) NOT NULL,
-	name NVARCHAR(100) NOT NULL, -- tiếng việt
+	name NVARCHAR(100) NOT NULL, 
 	email VARCHAR(100) NOT NULL UNIQUE,
-    student_code VARCHAR(100) NOT NULL UNIQUE,
-    gender BIT,
-    birthday DATE,
     address NVARCHAR(500),
-    course NVARCHAR(100)
 );
 
 
