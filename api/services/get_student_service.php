@@ -10,7 +10,7 @@ include_once("../../database/connection.php");
 // http://127.0.0.1:3456/api/services/get_student_service.php
 try {
     //code...
-    $service_student = $dbConn->query("SELECT id,studentCodeID,image,phoneNumber,service,note,quantity FROM services where studentCodeID='ps1234' ");
+    $service_student = $dbConn->query("SELECT id,studentCodeID,image,phoneNumber,service,note,quantity FROM services where service='Cấp thẻ sinh viên' ");
     $service_student = $service_student->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode(array(
         "status" => true,

@@ -7,51 +7,46 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once("../../database/connection.php");
 
-// http://localhost:3456/api/notification/get_notification_by_id.php?userId=2
+// http://localhost:3456/api/news/get_detail_news.php?newsId=2
 
 try {
-    // Lấy categoryId từ query parameter của API
-    $userId = $_GET['userId'];
-    // Sử dụng Prepared Statements và đặt tên tham số là ":userId"
+    // Lấy id từ query parameter của API
+    $newsId = $_GET['newsId'];
+
+    // Sử dụng Prepared Statements và đặt tên tham số là ":productId"
     $stmt = $dbConn->prepare(
-    "SELECT 
-        notifications.id, 
-        notifications.newsId,
-        notifications.userId,
-        news.title, 
-        news.image, 
-        news.detail, 
-        news.categoryId 
-    FROM 
-        notifications 
-    INNER JOIN 
-        news  
-    ON 
-        notifications.newsId = news.id
-    WHERE 
-        notifications.userId = :userId"
+        "SELECT 
+            id, 
+            title, 
+            detail,  
+            image, 
+            categoryId 
+        FROM 
+            news
+        WHERE 
+            id = :newsId"
     );
 
-    // Truyền giá trị userId vào câu truy vấn
-    $stmt->bindParam(":userId", $userId, PDO::PARAM_INT);
+    // Truyền giá trị categoryId vào câu truy vấn
+    $stmt->bindParam(":newsId", $newsId, PDO::PARAM_INT);
 
     // Thực thi câu truy vấn
     $stmt->execute();
 
     // Lấy một bản ghi duy nhất từ câu truy vấn (fetch_assoc sẽ lấy bản ghi đầu tiên)
-    $notification = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $news = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Kiểm tra nếu có kết quả
-    if ($notification) {
+    if ($news) {
         echo json_encode(array(
             "status" => true,
             "message" => "Success",
-            "notification" => $notification
+            "oneNews" => $news
         ));
     } else {
         echo json_encode(array(
             "status" => false,
-            "message" => "notification not found"
+            "message" => "Product not found"
         ));
     }
 
