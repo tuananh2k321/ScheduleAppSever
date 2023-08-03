@@ -11,8 +11,7 @@ include_once("../../database/connection.php");
 
 try {
     // Lấy categoryId từ query parameter của API
-    $categoryId = $_GET['userId'];
-
+    $userId = $_GET['userId'];
     // Sử dụng Prepared Statements và đặt tên tham số là ":userId"
     $stmt = $dbConn->prepare(
     "SELECT 
@@ -21,7 +20,7 @@ try {
         notifications.userId,
         news.title, 
         news.image, 
-        news.description, 
+        news.detail, 
         news.categoryId 
     FROM 
         notifications 
@@ -47,7 +46,7 @@ try {
         echo json_encode(array(
             "status" => true,
             "message" => "Success",
-            "favorites" => $notification
+            "notification" => $notification
         ));
     } else {
         echo json_encode(array(

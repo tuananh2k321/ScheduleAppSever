@@ -385,20 +385,20 @@ create TABLE if not exists schedules(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     date DATE NOT NULL,
 
-)
+);
 
 
 -- notification
 -- api: get notification, add notification
 
-create TABLE if not exists notifications(
+CREATE TABLE IF NOT EXISTS notifications (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    userID INT NOT NULL,
-    newsID INT NOT NULL,
-
-    FOREIGN KEY (userID) REFERENCES users(id)
-    FOREIGN KEY (newsID) REFERENCES news(id)
-)
+    userId VARCHAR(7) NOT NULL,
+    newsId INT NOT NULL,
+    isSeen BIT DEFAULT 0,
+    FOREIGN KEY (userId) REFERENCES users(studentCode),
+    FOREIGN KEY (newsId) REFERENCES news(id)
+);
 
 -- service
 
