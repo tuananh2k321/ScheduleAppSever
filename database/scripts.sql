@@ -15,7 +15,8 @@ create table if not exists users (
 	avatar VARCHAR(150) NOT NULL,
 	name NVARCHAR(100) NOT NULL, 
 	email VARCHAR(100) NOT NULL UNIQUE,
-    address NVARCHAR(500),
+    isLogged BIT DEFAULT 0,
+    address NVARCHAR(500)
 );
 
 
