@@ -7,7 +7,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once("../../database/connection.php");
 
-// http://localhost:3456/api/notification/get_notification_by_id.php?userId=2
+// http://localhost:3456/api/notification/get_notification_by_id.php?userId=ps24524
 
 try {
     // Lấy categoryId từ query parameter của API
@@ -18,6 +18,9 @@ try {
         notifications.id, 
         notifications.newsId,
         notifications.userId,
+        notifications.serviceId,
+        notifications.scheduleId,
+        notifications.isSeen,
         news.title, 
         news.image, 
         news.detail, 
