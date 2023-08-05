@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if( empty($service) || empty($mucdich) || empty($studentCodeID) || empty($phoneNumber) || empty($quantity)  || empty($confirm)){
             echo json_encode(array(
-                "status" => false,
-                "message" => $e->getMessage()
+                "status" => "error",
+                "message" => "Lỗi không nhập đủ dữ liệu"
             ));
             return;
         }
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (\Throwable $th) {
         //throw $th;
         echo json_encode(array(
-            "status" => false,
+            "status" => "error",
             "messages" =>"Lỗi không đúng dữ liệu"
         ));
     }
