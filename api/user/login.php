@@ -15,39 +15,65 @@ try {
     $body = json_decode(file_get_contents("php://input"));
 
     $email = $body->email;
+    $name = $body->name;
     $address = $body->address;
 
-    if (empty($email) || empty($address)) {
-        echo json_encode(array(
-            "message" => "empty",
-            "email" =>$email,
-            "address" =>$address,
-       ));
-    }
-
-    $user = $dbConn->query("SELECT address, email, studentCode FROM users WHERE email = '$email' and address = '$address'");
-
-    if ($user->rowCount() > 0) {
-        $row = $user->fetch(PDO::FETCH_ASSOC);
-        $email = $row['email'];
-        $address = $row['address'];
-        $studentCode = $row['studentCode'];
-
-            // lưu thông tin đăng nhập vào session
-            echo json_encode(array(
-                "status" => true,
-                "message" =>"success",
-                "email" =>$email,
-                "studentCode" =>$studentCode
-        ));
-    } else {
+     // nếu ko nhập email || name thì trả về false
+     if (empty($email) || empty($name) || empty($address)) {
         echo json_encode(array(
             "status" => false,
-            "message" => "incorrect password or email",
-       ));
+            "message" => "Email or name is empty"
+        ));
+        return;
     }
-} catch (Exception $e) {
 
+    $avatar = "";
+    // cắt chuỗi từ @ trở về trước 7 kí tự
+    $substring = strstr($email, "@", true);
+    $studentCode = substr($substring, -7);
+
+    $user = $dbConn->query("SELECT address, email, name , studentCode
+    FROM users WHERE email = '$email' ");
+
+    
+
+    if ($user->rowCount() <= 0) {
+        // nếu email chưa tồn tại thì thêm vào database
+        $dbConn->query("insert into users (name, email, 
+        avatar, studentCode, address) 
+        values ('$name', '$email', '$avatar', '$studentCode', 
+        '$address')");
+
+
+        $user = $dbConn->query("SELECT email, avatar,
+                    studentCode, address, name 
+                    FROM users where email='$email'and address = '$address'");
+
+    }
+
+    // lấy thông tin user
+    $row = $user->fetch(PDO::FETCH_ASSOC);
+    $email = $row['email'];
+    // $avatar = $row['avatar'];
+    $studentCode = $row['studentCode'];
+    $address = $row['address'];
+    // trả về thông tin user dưới dạng json
+    echo json_encode(array(
+        "status" => true,
+        "user" => array(
+            "email" => $email,
+            "avatar" => $avatar,
+            "studentCode" => $studentCode,
+            "address" => $address,
+        ),
+    ));
+    
+    
+} catch (Exception $e) {
+    echo json_encode(array(
+        "status" => false,
+        "message" => $e->getMessage()
+    ));
 }
 
 ?>
