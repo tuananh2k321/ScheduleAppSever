@@ -10,7 +10,7 @@ include_once("../../database/connection.php");
 // http://127.0.0.1:3456/api/services/get_all_service_complete.php
 try {
     //code...
-    $service_complete = $dbConn->query("SELECT id,studentCodeID,service,date,confirm,thongbao FROM servicecomplete");
+    $service_complete = $dbConn->query("SELECT id,phoneNumber,service,quantity,mucdich,confirm FROM services");
     $service_complete = $service_complete->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode(array(
         "status" => "success",

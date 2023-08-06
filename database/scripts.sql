@@ -396,6 +396,7 @@ create table if not exists schedules (
     FOREIGN KEY (user_id) REFERENCES users(studentCode)
 );
 
+<<<<<<< HEAD
 
 insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-01', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 1, "ps24524");
 insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-02', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 0, "ps24524");
@@ -409,6 +410,14 @@ insert into schedules (room, day, time, course_name, course_id, class_name, teac
 insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-11', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 0, "ps24524");
 insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-12', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 1, "ps24524");
 insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-12', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 1, "ps24524");
+=======
+insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-01', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 1, "ps24513");
+insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-01', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 1, "ps24513");
+insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-01', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 1, "ps24513");
+insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-01', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 0, "ps24513");
+insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-01', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 0, "ps24513");
+insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-01', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 0, "ps24513");
+>>>>>>> 11d91cc30891318b903b5bea07633a3f7a627bcd
 
 insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-01', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 1, "ps24524");
 insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-01', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 1, "ps24524");
@@ -468,7 +477,6 @@ insert into schedules (room, day, time, course_name, course_id, class_name, teac
 insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-12', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 0, "ps24513");
 insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-12', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 1, "ps24513");
 insert into schedules (room, day, time, course_name, course_id, class_name, teacher_name, address, type, user_id) values ('T308', '2023-08-12', '17:30 - 19:30 PM', 'Android Networking', 'MOB1234',  'MD17306', 'Chann3', 'Phan Mem Quang Trung', 1, "ps24513");
-
 
 
 -- notification
